@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布博客</title>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>个人博客系统-发布博客</h1>
+<div>
+    <table>
+        <tr>
+            <td>博客标题</td>
+            <td><input id="title" type="text"></td>
+        </tr>
+        <tr>
+            <td>博客内容</td>
+            <td><textarea id="content" rows="20" cols="60"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="publish(this)">保存</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+function publish(){
+    var title=$("#title").val();
+    var content=$("#content").val();
+    var param_data={"title" : title,"content" : content};
+    $.ajax({
+        type:'PUT',
+        url:'/blog',
+        contentType:'application/json',
+        withCredentials:true,
+        data: JSON.stringify(param_data),
+        success: function(data){
+            alert("发布博客成功！");
+        },
+        error: function(data){
+            alert("发布博客失败！");
+            console.log(data);
+            return;
+        }
+    });
+}
+</script>
+</body>
+</html>

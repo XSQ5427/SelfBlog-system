@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>博客列表</title>
+    <style>
+        table,table tr th, table tr td {border:1px solid #000000;}
+    </style>
+</head>
+<body>
+<h2>个人博客系统-博客列表</h2>
+<table style="..." rules="rows">
+    <thead>
+    <tr>
+        <th>标题</th>
+        <th>创建时间</th>
+        <th>浏览次数</th>
+        <th>喜欢次数</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+    <tr th:each="blog:${blogs}">
+        <td>
+            <a th:text="${blog.title}" th:href="@{'/blog/'+${blog.id}}"></a>
+        </td>
+        <td th:text="${blog.publishTime}"></td>
+        <td th:text="${blog.scanCount}"></td>
+        <td th:text="${blog.likeCount}"></td>
+    </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <a th:href="@{'/blog?page=' + ${pageLast} + '&size=' + ${size}}">上一页</a>
+            </td>
+            <td>
+                <a th:href="@{'/blog?page=' + ${pageNext} + '&size=' + ${size}}">下一页</a>
+            </td>
+            <td>当前第<span th:text="${currentPage}"></span>页</td>
+            <td>总共<span th:text="${total}"></span>页</td>
+        </tr>
+    </tfoot>
+</table>
+<hr>
+<a href="/user" th:text="${user !=null ? '当前用户，'+user.phoneNumber : ''}"></a>
+<a href="/login.html" th:text="${user !=null ? '':'未登录，去登录'}"></a>
+<hr>
+</body>
+</html>

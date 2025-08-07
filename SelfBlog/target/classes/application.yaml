@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3306/selfblog"
+    username: "root"
+    password: "123456"
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+mvc:
+  view:
+    prefix: /templates/
+    suffix: .html
